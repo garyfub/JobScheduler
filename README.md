@@ -12,7 +12,7 @@
 
 - 主要目的：依赖现有的 Quartz，提供 DashBoard。
 - 设计：
-  - 后端：springboot + spring data jpa + mysql。
+  - 后端：springboot + mybatis + mysql。
   - 前端：nodejs + swig。
 
 使用前后端，主要是考虑以后可以换后端，或者换前端。  
