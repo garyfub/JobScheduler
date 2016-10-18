@@ -7,16 +7,23 @@
 
 {% block mainContent %}
     <div>
-        hello world
-        <table>
+        <table class = "table" style = "font-size:13px">
             <tr>
                 <td>#</td>
                 <td>trigger 名称</td>
+                <td>上次触发时间</td>
+                <td>下次触发时间</td>
+                <td>当前状态</td>
+                <td>详细信息</td>
             </tr>
             {% for trigger in data %}
             <tr>
                 <td>{{loop.index}}</td>
                 <td>{{trigger.triggerName}}</td>
+                <td>{{trigger.prevFireTime}}</td>
+                <td>{{trigger.nextFireTime}}</td>
+                <td>{{trigger.triggerState}}</td>
+                <td><a href = "">详细信息</a></td>
             </tr>
             {% endfor %}
         </table>

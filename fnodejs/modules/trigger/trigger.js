@@ -32,6 +32,18 @@ router.get('/index',function(req,res,next){
             res.render('error/unknowerror');
             return ;
         }
+
+        //时间戳转换，便于前端展示
+        for(var i = 0; i < returnData.data.length; ++i){
+            var datePrev = new Date(returnData.data[i].prevFireTime);
+            var dateNext = new Date(returnData.data[i].nextFireTime);
+
+            returnData.data[i].prevFireTime = datePrev.getFullYear() + "年" + datePrev.getMonth() + "月" + datePrev.getDate() + "日" +
+                datePrev.getHours() + "时" + datePrev.getMinutes() + "分" + datePrev.getSeconds() + "秒";
+            returnData.data[i].nextFireTime = dateNext.getFullYear() + "年" + dateNext.getMonth() + "月" + dateNext.getDate() + "日" +
+                dateNext.getHours() + "时" + dateNext.getMinutes() + "分" + dateNext.getSeconds() + "秒";
+        }
+
         res.render('trigger/index',{'data':returnData.data});
     });
 });
