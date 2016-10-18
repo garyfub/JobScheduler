@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Quartz Dashboard</title>
+        <link rel="shortcut icon" type="image/x-icon" href="/images/yx.ico" media="screen" />
+
+        <link rel = "stylesheet" href = "/stylesheets/bootstrap.min.css">
+        <script src = "/javascripts/jquery.min.js" ></script>
+        <script src = "/javascripts/bootstrap.min.js" ></script>
+        
+        <style type = "text/css">
+body{
+    font:400 14px/1.6 'Lato', 'Open Sans', HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 30px;
+}
+a{
+    color: black;
+    text-decoration: underline;
+}
+a:hover{
+    color: blue;
+}
+        </style>
+        {% block subIncludeFileBeforeBody %}{% endblock %}
+    </head>
+    <body>
+        <div>
+            <h2>Quartz Dashboard</h2>
+            <div id = "row" style = "margin-top:30px">
+                <div style = "float:left;width:30%">
+                    <a href = "">trigger 查看</a>
+                </div>
+                <div style = "float:left;width:70%">
+                    {% block mainContent  %}{% endblock %}
+                </div>
+                <div style = "clear:both"></div>
+            </div>
+
+            <div id = "footer" style = "min-height:100px"></div>
+        </div>
+    
+    {% block subIncludeFileAfterBody %}{% endblock %}
+    </body>
+</html>
+
+
+
+

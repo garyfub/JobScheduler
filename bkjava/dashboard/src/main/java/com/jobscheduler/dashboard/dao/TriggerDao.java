@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface TriggerDao{
     @Select("select " +
-            "SCHED_NAME as schedName," +
+            "TRIGGER_NAME as triggerName," +
             "NEXT_FIRE_TIME as nextFireTime," +
             "PREV_FIRE_TIME as prevFireTime," +
             "TRIGGER_STATE as triggerState," +

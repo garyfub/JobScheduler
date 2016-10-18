@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 public class Trigger {
-    private String schedName;
+    private String triggerName;
     private long nextFireTime;
     private long prevFireTime;
     private String triggerState;

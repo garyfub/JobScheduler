@@ -1,0 +1,30 @@
+{% extends  '../common/base.html' %}
+
+{% block subIncludeFileBeforeBody %}
+    {% block subIncludeFileBeforeBody1 %}{% endblock %}
+{% endblock %}
+
+
+{% block mainContent %}
+    <div>
+        hello world
+        <table>
+            <tr>
+                <td>#</td>
+                <td>trigger 名称</td>
+            </tr>
+            {% for trigger in data %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{trigger.triggerName}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block subIncludeFileAfterBody %}
+    {% block subIncludeFileAfterBody1 %}{% endblock %}
+{% endblock %}
+
