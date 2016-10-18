@@ -15,6 +15,12 @@ import java.util.List;
 
 @Mapper
 public interface TriggerDao{
-    @Select("select SCHED_NAME as schedName from QRTZ_TRIGGERS")
+    @Select("select " +
+            "SCHED_NAME as schedName," +
+            "NEXT_FIRE_TIME as nextFireTime," +
+            "PREV_FIRE_TIME as prevFireTime," +
+            "TRIGGER_STATE as triggerState," +
+            "START_TIME as startTime " +
+            "from QRTZ_TRIGGERS")
     List<Trigger> findAll();
 }
