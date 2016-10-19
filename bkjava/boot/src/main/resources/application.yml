@@ -1,3 +1,5 @@
+server:
+    port: 6314
 spring:
     datasource:
         test-on-borrow: true
