@@ -19,7 +19,12 @@
 
 如下图：
 
-![quartz](http://7xrzlm.com1.z0.glb.clouddn.com/quartzDashboard.png)
+Trigger查看：
+
+![trigger](http://7xrzlm.com1.z0.glb.clouddn.com/quartdashboardTrigger.png)	
+Job查看：
+
+![job](http://7xrzlm.com1.z0.glb.clouddn.com/quartdashboardJon.png)
 
 # 第二步
 
