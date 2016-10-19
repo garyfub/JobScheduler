@@ -23,15 +23,52 @@
                 <td>{{trigger.prevFireTime}}</td>
                 <td>{{trigger.nextFireTime}}</td>
                 <td>{{trigger.triggerState}}</td>
-                <td><a href = "">详细信息</a></td>
+                <td><a href= "javascript:void(0)" onclick = "getDetail('{{trigger.triggerName}}')">详细信息</a></td>
             </tr>
             {% endfor %}
         </table>
+
+        <div class = "triggerDetail" style = "margin-top:20px;">
+        </div>
     </div>
 {% endblock %}
 
 
 {% block subIncludeFileAfterBody %}
+<script type = "text/javascript">
+
+function getDetail(triggerName){
+    if(triggerName == null || triggerName == ""){
+        alert("参数有误，请刷新网页或者联系开发");
+    }
+    $.ajax({
+        type: 'GET',
+        url: '/trigger/' + triggerName,
+        success: function(data){
+            console.log(data);
+            displayDetail(data);
+        },
+        error: function(err){
+            alert("后端出错，请刷新网页或者联系开发");
+        }
+    })
+}
+function displayDetail(data){
+    $(".triggerDetail").empty();
+    console.log(data);
+    $(".triggerDetail").append(
+            "<h5>详细信息：</h5>" +
+            "schedName:&nbsp;&nbsp;" + data.schedName + "<br/>" + 
+            "triggerName:&nbsp;&nbsp;" + data.triggerName + "<br/>" + 
+            "triggerGroup:&nbsp;&nbsp;" + data.triggerGroup + "<br/>" + 
+            "jobName:&nbsp;&nbsp;" + data.jobName + "<br/>" + 
+            "prevFireTime:&nbsp;&nbsp;" + data.prevFireTime + "<br/>" + 
+            "nextFireTime:&nbsp;&nbsp;" + data.nextFireTime + "<br/>" + 
+            "triggerState:&nbsp;&nbsp;" + data.triggerState);
+}
+
+</script>
+
     {% block subIncludeFileAfterBody1 %}{% endblock %}
 {% endblock %}
 

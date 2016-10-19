@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface TriggerService {
     List<Trigger> findTriggers();
+
+    Trigger findTriggerByTriggerName(final String triggerName);
 }

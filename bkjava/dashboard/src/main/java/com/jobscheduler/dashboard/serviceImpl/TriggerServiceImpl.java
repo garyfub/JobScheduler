@@ -25,4 +25,9 @@ public class TriggerServiceImpl implements TriggerService{
     public List<Trigger> findTriggers() {
         return triggerDao.findAll();
     }
+
+    @Override
+    public Trigger findTriggerByTriggerName(final String triggerName) {
+        return triggerDao.findTriggerByTriggerName(triggerName);
+    }
 }

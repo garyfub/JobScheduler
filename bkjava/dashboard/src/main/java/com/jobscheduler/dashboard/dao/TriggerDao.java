@@ -2,6 +2,7 @@ package com.jobscheduler.dashboard.dao;
 
 import com.jobscheduler.dashboard.model.Trigger;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -19,8 +20,19 @@ public interface TriggerDao{
             "TRIGGER_NAME as triggerName," +
             "NEXT_FIRE_TIME as nextFireTime," +
             "PREV_FIRE_TIME as prevFireTime," +
-            "TRIGGER_STATE as triggerState," +
-            "START_TIME as startTime " +
+            "TRIGGER_STATE as triggerState " +
             "from QRTZ_TRIGGERS")
     List<Trigger> findAll();
+
+    @Select("select " +
+            "SCHED_NAME as schedName," +
+            "TRIGGER_NAME as triggerName," +
+            "TRIGGER_GROUP as triggerGroup," +
+            "JOB_NAME as jobName," +
+            "NEXT_FIRE_TIME as nextFireTime," +
+            "PREV_FIRE_TIME as prevFireTime," +
+            "TRIGGER_STATE as triggerState " +
+            "from QRTZ_TRIGGERS " +
+            "where TRIGGER_NAME = #{triggerName}")
+    Trigger findTriggerByTriggerName(@Param("triggerName") final String triggerName);
 }

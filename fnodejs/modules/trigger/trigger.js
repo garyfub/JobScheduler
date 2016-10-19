@@ -48,4 +48,47 @@ router.get('/index',function(req,res,next){
     });
 });
 
+router.get('/:triggerName',function(req,res,next){
+    var triggerName = req.params.triggerName;
+
+    logger.debug("triggerName = " + triggerName);
+
+    if(triggerName == null || triggerName == ""){
+        res.render('error/unknowerror');
+        return ;
+    }
+
+    var url = serverConstant.getBackendUrlPrefix() + "/trigger/" + triggerName;
+    request(url,function(error,response,body){
+
+        if(error != null){
+            logger.error(error);
+            res.render('error/unknowerror');
+            return ;
+        }
+
+        var returnData = JSON.parse(body);
+
+        if(returnData.statusCode != 0){
+            logger.error("url = " + url + " -- returnData.statusCode = " + returnData.statusCode);
+            res.render('error/unknowerror');
+            return ;
+        }
+
+        var trigger = returnData.data;
+
+        //时间戳转换，便于前端展示
+        var datePrev = new Date(trigger.prevFireTime);
+        var dateNext = new Date(trigger.nextFireTime);
+
+        trigger.prevFireTime = datePrev.getFullYear() + "年" + datePrev.getMonth() + "月" + datePrev.getDate() + "日" +
+            datePrev.getHours() + "时" + datePrev.getMinutes() + "分" + datePrev.getSeconds() + "秒";
+        trigger.nextFireTime = dateNext.getFullYear() + "年" + dateNext.getMonth() + "月" + dateNext.getDate() + "日" +
+            dateNext.getHours() + "时" + dateNext.getMinutes() + "分" + dateNext.getSeconds() + "秒";
+
+        res.json(trigger).end();
+    });
+
+})
+
 module.exports = router;
