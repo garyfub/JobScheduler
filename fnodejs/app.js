@@ -43,7 +43,7 @@ app.use(myLogger);
 //*                     visitor route                    *
 //********************************************************
 var index = require('./modules/index.js');
-app.use('/index',index);
+app.use('/quartz',index);
 var trigger = require('./modules/trigger/trigger.js');
 app.use('/trigger',trigger);
 var job = require('./modules/job/job.js');
