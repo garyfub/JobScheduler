@@ -28,6 +28,9 @@
             {% endfor %}
         </table>
 
+        <div style = "margin-top:20px;">
+            <span style = "color:blue">PS：一个 trigger 对应一个 job，一个job 可以对应多个 trigegr</span>
+        </div>
         <div class = "triggerDetail" style = "margin-top:20px;">
         </div>
     </div>
@@ -58,13 +61,13 @@ function displayDetail(data){
     console.log(data);
     $(".triggerDetail").append(
             "<h5>详细信息：</h5>" +
-            "schedName:&nbsp;&nbsp;" + data.schedName + "<br/>" + 
-            "triggerName:&nbsp;&nbsp;" + data.triggerName + "<br/>" + 
-            "triggerGroup:&nbsp;&nbsp;" + data.triggerGroup + "<br/>" + 
-            "jobName:&nbsp;&nbsp;" + data.jobName + "<br/>" + 
-            "prevFireTime:&nbsp;&nbsp;" + data.prevFireTime + "<br/>" + 
-            "nextFireTime:&nbsp;&nbsp;" + data.nextFireTime + "<br/>" + 
-            "triggerState:&nbsp;&nbsp;" + data.triggerState);
+            "schedName(调度器，表示集群中的某一台机子):&nbsp;&nbsp;" + data.schedName + "<br/>" + 
+            "triggerName（trigger名称）:&nbsp;&nbsp;" + data.triggerName + "<br/>" + 
+            "triggerGroup（trigger所在的组）:&nbsp;&nbsp;" + data.triggerGroup + "<br/>" + 
+            "jobName（对应的job）:&nbsp;&nbsp;" + data.jobName + "<br/>" + 
+            "prevFireTime（上次触发时间）:&nbsp;&nbsp;" + data.prevFireTime + "<br/>" + 
+            "nextFireTime（下次触发时间）:&nbsp;&nbsp;" + data.nextFireTime + "<br/>" + 
+            "triggerState（trigger现在的状态）:&nbsp;&nbsp;" + data.triggerState);
 }
 
 </script>

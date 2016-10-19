@@ -35,13 +35,23 @@ router.get('/index',function(req,res,next){
 
         //时间戳转换，便于前端展示
         for(var i = 0; i < returnData.data.length; ++i){
-            var datePrev = new Date(returnData.data[i].prevFireTime);
-            var dateNext = new Date(returnData.data[i].nextFireTime);
 
-            returnData.data[i].prevFireTime = datePrev.getFullYear() + "年" + datePrev.getMonth() + "月" + datePrev.getDate() + "日" +
-                datePrev.getHours() + "时" + datePrev.getMinutes() + "分" + datePrev.getSeconds() + "秒";
-            returnData.data[i].nextFireTime = dateNext.getFullYear() + "年" + dateNext.getMonth() + "月" + dateNext.getDate() + "日" +
-                dateNext.getHours() + "时" + dateNext.getMinutes() + "分" + dateNext.getSeconds() + "秒";
+            if(returnData.data[i].prevFireTime == -1){
+                returnData.data[i].prevFireTime = "暂无";
+            } else {
+                var datePrev = new Date(returnData.data[i].prevFireTime);
+                returnData.data[i].prevFireTime = datePrev.getFullYear() + "年" + datePrev.getMonth() + "月" + datePrev.getDate() + "日" +
+                    datePrev.getHours() + "时" + datePrev.getMinutes() + "分" + datePrev.getSeconds() + "秒";
+            }
+
+            if(returnData.data[i].nextFireTime == -1){
+                returnData.data[i].nextFireTime = "暂无";
+            } else {
+                var dateNext = new Date(returnData.data[i].nextFireTime);
+                returnData.data[i].nextFireTime = dateNext.getFullYear() + "年" + dateNext.getMonth() + "月" + dateNext.getDate() + "日" +
+                    dateNext.getHours() + "时" + dateNext.getMinutes() + "分" + dateNext.getSeconds() + "秒";
+            }
+
         }
 
         res.render('trigger/index',{'data':returnData.data});
@@ -78,17 +88,24 @@ router.get('/:triggerName',function(req,res,next){
         var trigger = returnData.data;
 
         //时间戳转换，便于前端展示
-        var datePrev = new Date(trigger.prevFireTime);
-        var dateNext = new Date(trigger.nextFireTime);
+        if(trigger.prevFireTime == -1){
+            trigger.prevFireTime = "暂无";
+        } else {
+            var datePrev = new Date(trigger.prevFireTime);
+            trigger.prevFireTime = datePrev.getFullYear() + "年" + datePrev.getMonth() + "月" + datePrev.getDate() + "日" +
+                datePrev.getHours() + "时" + datePrev.getMinutes() + "分" + datePrev.getSeconds() + "秒";
+        }
 
-        trigger.prevFireTime = datePrev.getFullYear() + "年" + datePrev.getMonth() + "月" + datePrev.getDate() + "日" +
-            datePrev.getHours() + "时" + datePrev.getMinutes() + "分" + datePrev.getSeconds() + "秒";
-        trigger.nextFireTime = dateNext.getFullYear() + "年" + dateNext.getMonth() + "月" + dateNext.getDate() + "日" +
-            dateNext.getHours() + "时" + dateNext.getMinutes() + "分" + dateNext.getSeconds() + "秒";
+        if(trigger.nextFireTime == -1){
+            trigger.nextFireTime = "暂无";
+        } else {
+            var dateNext = new Date(trigger.nextFireTime);
+            trigger.nextFireTime = dateNext.getFullYear() + "年" + dateNext.getMonth() + "月" + dateNext.getDate() + "日" +
+                dateNext.getHours() + "时" + dateNext.getMinutes() + "分" + dateNext.getSeconds() + "秒";
+        }
 
         res.json(trigger).end();
     });
-
 })
 
 module.exports = router;
