@@ -14,4 +14,6 @@ public interface TriggerService {
     List<Trigger> findTriggers();
 
     Trigger findTriggerByTriggerName(final String triggerName);
+
+    List<Trigger> findTriggerByJobName(final String jobName);
 }

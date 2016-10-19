@@ -1,6 +1,5 @@
 package com.jobscheduler.dashboard.controller;
 
-import com.jobscheduler.dashboard.model.Trigger;
 import com.jobscheduler.dashboard.service.TriggerService;
 import com.jobscheduler.dashboard.utils.ReturnTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +37,6 @@ public class TriggerController {
             throw new IllegalArgumentException("triggerName is invalid");
         }
 
-        Trigger trigger = triggerService.findTriggerByTriggerName(triggerName);
-
-        return new ReturnTemplate(trigger);
+        return new ReturnTemplate(triggerService.findTriggerByTriggerName(triggerName));
     }
 }

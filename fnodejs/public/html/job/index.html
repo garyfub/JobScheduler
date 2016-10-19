@@ -1,0 +1,93 @@
+{% extends  '../common/base.html' %}
+
+{% block subIncludeFileBeforeBody %}
+    {% block subIncludeFileBeforeBody1 %}{% endblock %}
+{% endblock %}
+
+
+{% block mainContent %}
+    <div>
+        <table class = "table" style = "font-size:13px">
+            <tr>
+                <td>#</td>
+                <td>job 名称</td>
+                <td>job 对应的 class</td>
+                <td>job 对应的 trigger 名称</td>
+                <td>是否支持并发执行</td>
+                <td>详细信息</td>
+            </tr>
+            {% for job in data %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{job.jobName}}</td>
+                <td>{{job.jobClassName}}</td>
+                <td>
+                    {% for trigger in job.triggerList %}
+                        {% if loop.index == 1 %}
+                            {{trigger.triggerName}}
+                        {% else %}
+                            ,{{trigger.triggerName}},
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{job.isNonConcurrent}}</td>
+                <td><a href= "javascript:void(0)" onclick = "getDetail('{{job.jobName}}')">详细信息</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div style = "margin-top:20px;">
+            <span style = "color:blue">PS：一个 trigger 对应一个 job，一个job 可以对应多个 trigegr</span>
+        </div>
+        <div class = "jobDetail" style = "margin-top:20px;">
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block subIncludeFileAfterBody %}
+<script type = "text/javascript">
+
+function getDetail(jobName){
+    if(jobName == null || jobName == ""){
+        alert("参数有误，请刷新网页或者联系开发");
+    }
+    $.ajax({
+        type: 'GET',
+        url: '/job/' + jobName,
+        success: function(data){
+            displayDetail(data);
+        },
+        error: function(err){
+            alert("后端出错，请刷新网页或者联系开发");
+        }
+    })
+}
+function displayDetail(data){
+    $(".jobDetail").empty();
+
+    var triggerList;
+    for(var i = 0; i < data.triggerList.length; ++i){
+        if(i == 0){
+            triggerList = data.triggerList[0].triggerName;
+        } else {
+            triggerList = triggerList + "," + data.triggerList[i].triggerName;
+        }
+    }
+
+    $(".jobDetail").append(
+            "<h5>详细信息：</h5>" +
+            "schedName(调度器，表示集群中的某一台机子):&nbsp;&nbsp;" + data.schedName + "<br/>" + 
+            "jobName（job名称）:&nbsp;&nbsp;" + data.jobName + "<br/>" + 
+            "jobClassName（job对应的执行类）:&nbsp;&nbsp;" + data.jobClassName + "<br/>" + 
+            "isDurable（是否支持持久化）:&nbsp;&nbsp;" + data.isDurable + "<br/>" + 
+            "isNonConcurrent（是否支持并发执行）:&nbsp;&nbsp;" + data.isNonConcurrent + "<br/>" + 
+            "requestsRecovery（是否需要检测当前的任务时候错过了应该触发的时间，如果错过了会立即触发）:&nbsp;&nbsp;" + data.requestsRecovery + "<br/>" +
+            "triggerList（对应的各个trigger）:&nbsp;&nbsp;" + triggerList + "<br/>");
+}
+
+</script>
+
+    {% block subIncludeFileAfterBody1 %}{% endblock %}
+{% endblock %}
+

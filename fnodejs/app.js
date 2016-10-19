@@ -46,6 +46,8 @@ var index = require('./modules/index.js');
 app.use('/index',index);
 var trigger = require('./modules/trigger/trigger.js');
 app.use('/trigger',trigger);
+var job = require('./modules/job/job.js');
+app.use('/job',job);
 
 
 //********************************************************

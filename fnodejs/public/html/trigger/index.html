@@ -13,7 +13,7 @@
                 <td>trigger 名称</td>
                 <td>上次触发时间</td>
                 <td>下次触发时间</td>
-                <td>当前状态</td>
+                <td>对应的 job</td>
                 <td>详细信息</td>
             </tr>
             {% for trigger in data %}
@@ -22,7 +22,7 @@
                 <td>{{trigger.triggerName}}</td>
                 <td>{{trigger.prevFireTime}}</td>
                 <td>{{trigger.nextFireTime}}</td>
-                <td>{{trigger.triggerState}}</td>
+                <td>{{trigger.jobName}}</td>
                 <td><a href= "javascript:void(0)" onclick = "getDetail('{{trigger.triggerName}}')">详细信息</a></td>
             </tr>
             {% endfor %}
@@ -48,7 +48,6 @@ function getDetail(triggerName){
         type: 'GET',
         url: '/trigger/' + triggerName,
         success: function(data){
-            console.log(data);
             displayDetail(data);
         },
         error: function(err){
@@ -58,7 +57,6 @@ function getDetail(triggerName){
 }
 function displayDetail(data){
     $(".triggerDetail").empty();
-    console.log(data);
     $(".triggerDetail").append(
             "<h5>详细信息：</h5>" +
             "schedName(调度器，表示集群中的某一台机子):&nbsp;&nbsp;" + data.schedName + "<br/>" + 

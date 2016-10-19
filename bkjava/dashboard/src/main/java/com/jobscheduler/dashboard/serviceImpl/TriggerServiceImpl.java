@@ -30,4 +30,9 @@ public class TriggerServiceImpl implements TriggerService{
     public Trigger findTriggerByTriggerName(final String triggerName) {
         return triggerDao.findTriggerByTriggerName(triggerName);
     }
+
+    @Override
+    public List<Trigger> findTriggerByJobName(final String jobName) {
+        return triggerDao.findTriggerByJobName(jobName);
+    }
 }
