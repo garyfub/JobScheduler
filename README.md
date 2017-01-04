@@ -26,6 +26,30 @@ Job查看：
 
 ![job](http://7xrzlm.com1.z0.glb.clouddn.com/quartdashboardJon.png)
 
+### 启动方式
+
+在启动 mysql 数据库后：
+
+#### 后端启动
+
+1. 进入 bkjava 目录， `mvn clean install` 编译出 jar 包（在 boot/target 目录下）。
+2. 进入 boot/target 目录， `java -jar boot-1.0-SNAPSHOT.jar &` 即可启动成功。
+
+#### 前端启动
+
+1. 进入 fnodejs 目录。 `node app.js &` 即可启动成功。
+
+#### 相关配置
+
+1. 后端端口配置在 /bkjava/boot/src/main/resources/application.yml 文件，默认为 6314 端口。
+2. 前端端口配置在 /fnodejs/commons/constant/ServerConstant.js，默认为 7000端口。
+
+#### 访问
+
+`http://ip:port/quartz` 默认为：`http://localhost:7000/quartz`
+
+
+
 # 第二步
 
 对 Quartz 做一些删减，或者参考其实现，自己改进实现。
